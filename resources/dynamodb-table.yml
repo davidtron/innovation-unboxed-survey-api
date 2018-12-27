@@ -1,17 +1,17 @@
 Resources:
-  SurveysTable:
+  AuditsTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: ${self:custom.tableName}
       AttributeDefinitions:
         - AttributeName: userId
           AttributeType: S
-        - AttributeName: surveyId
+        - AttributeName: auditAnswersId
           AttributeType: S
       KeySchema:
         - AttributeName: userId
           KeyType: HASH
-        - AttributeName: surveyId
+        - AttributeName: auditAnswersId
           KeyType: RANGE
       # Set the capacity based on the stage
       ProvisionedThroughput:

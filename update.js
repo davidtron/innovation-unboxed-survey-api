@@ -7,17 +7,18 @@ export async function main(event, context) {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be updated
     // - 'userId': Identity Pool identity id of the authenticated user
-    // - 'surveyId': path parameter
+    // - 'auditAnswersId': path parameter
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
-      surveyId: event.pathParameters.id
+      auditAnswersId: event.pathParameters.id
     },
     // 'UpdateExpression' defines the attributes to be updated
     // 'ExpressionAttributeValues' defines the value in the update expression
-    UpdateExpression: "SET content = :content, attachment = :attachment",
+    UpdateExpression: "SET auditAnswers = :auditAnswers, currentPage = :currentPage, lastEditTime = :lastEditTime",
     ExpressionAttributeValues: {
-      ":attachment": data.attachment || null,
-      ":content": data.content || null
+      ":auditAnswers": data.auditAnswers || null,
+      ":currentPage": data.currentPage || null,
+      ":lastEditTime" : Date.now()
     },
     ReturnValues: "ALL_NEW"
   };

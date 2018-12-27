@@ -6,10 +6,10 @@ export async function main(event, context) {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
     // - 'userId': Identity Pool identity id of the authenticated user
-    // - 'surveyId': path parameter
+    // - 'auditAnswersId': path parameter
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
-      surveyId: event.pathParameters.id
+      auditAnswersId: event.pathParameters.id
     }
   };
 
