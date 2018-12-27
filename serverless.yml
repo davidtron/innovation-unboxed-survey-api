@@ -12,7 +12,7 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-surveys
+  tableName: ${self:custom.stage}-audits
   # Set our DynamoDB throughput for prod and all other non-prod stages.
   tableThroughputs:
     prod: 5
@@ -52,11 +52,11 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [ SurveysTable, Arn ]
+        - "Fn::GetAtt": [ AuditsTable, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
-  # - path: url path is /surveys
+  # - path: url path is /audits
   # - method: POST request
   # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
   #     domain api call
@@ -65,55 +65,55 @@ functions:
     handler: create.main
     events:
       - http:
-          path: surveys
+          path: audits
           method: post
           cors: true
           authorizer: aws_iam
 
   get:
     # Defines an HTTP API endpoint that calls the main function in get.js
-    # - path: url path is /surveys/{id}
+    # - path: url path is /audits/{id}
     # - method: GET request
     handler: get.main
     events:
       - http:
-          path: surveys/{id}
+          path: audits/{id}
           method: get
           cors: true
           authorizer: aws_iam
 
   list:
     # Defines an HTTP API endpoint that calls the main function in list.js
-    # - path: url path is /surveys
+    # - path: url path is /audits
     # - method: GET request
     handler: list.main
     events:
       - http:
-          path: surveys
+          path: audits
           method: get
           cors: true
           authorizer: aws_iam
 
   update:
     # Defines an HTTP API endpoint that calls the main function in update.js
-    # - path: url path is /surveys/{id}
+    # - path: url path is /audits/{id}
     # - method: PUT request
     handler: update.main
     events:
       - http:
-          path: surveys/{id}
+          path: audits/{id}
           method: put
           cors: true
           authorizer: aws_iam
 
   delete:
     # Defines an HTTP API endpoint that calls the main function in delete.js
-    # - path: url path is /surveys/{id}
+    # - path: url path is /audits/{id}
     # - method: DELETE request
     handler: delete.main
     events:
       - http:
-          path: surveys/{id}
+          path: audits/{id}
           method: delete
           cors: true
           authorizer: aws_iam
