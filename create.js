@@ -12,7 +12,8 @@ export async function main(event, context) {
       auditId: data.auditId,
       auditAnswers: data.auditAnswers,
       currentPage: 0,
-      lastEditTime: Date.now()
+      lastEditTime: Date.now(),
+      complete: false
     }
   };
 

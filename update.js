@@ -14,10 +14,11 @@ export async function main(event, context) {
     },
     // 'UpdateExpression' defines the attributes to be updated
     // 'ExpressionAttributeValues' defines the value in the update expression
-    UpdateExpression: "SET auditAnswers = :auditAnswers, currentPage = :currentPage, lastEditTime = :lastEditTime",
+    UpdateExpression: "SET auditAnswers = :auditAnswers, currentPage = :currentPage, complete = :complete, lastEditTime = :lastEditTime",
     ExpressionAttributeValues: {
       ":auditAnswers": data.auditAnswers || null,
       ":currentPage": data.currentPage || null,
+      ":complete": data.complete || false,
       ":lastEditTime" : Date.now()
     },
     ReturnValues: "ALL_NEW"
