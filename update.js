@@ -17,7 +17,7 @@ export async function main(event, context) {
     UpdateExpression: "SET auditAnswers = :auditAnswers, currentPage = :currentPage, complete = :complete, lastEditTime = :lastEditTime",
     ExpressionAttributeValues: {
       ":auditAnswers": data.auditAnswers || null,
-      ":currentPage": data.currentPage || null,
+      ":currentPage": data.currentPage || 0,
       ":complete": data.complete || false,
       ":lastEditTime" : Date.now()
     },
