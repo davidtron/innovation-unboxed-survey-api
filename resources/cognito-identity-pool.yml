@@ -71,6 +71,17 @@ Resources:
                       - Ref: ApiGatewayRestApi
                       - '/*'
 
+              # Allow users to read the audit configuration data in our AuditDataBucket S3 bucket
+              - Effect: 'Allow'
+                Action:
+                  - 's3:*'
+                Resource:
+                  - Fn::Join:
+                    - ''
+                    -
+                      - Fn::GetAtt: [AuditDataBucket, Arn]
+                      - '/*'
+
 
 # Print out the Id of the Identity Pool that is created
 Outputs:
